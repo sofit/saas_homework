@@ -7,6 +7,9 @@ class TestTask5 < Test::Unit::TestCase
     f.bar = 1
     f.bar = 2
     assert_equal([nil,1,2], f.bar_history)
+    f = Foo.new
+    f.bar = 4
+    assert_equal([nil,4], f.bar_history)
   end
 
   def test_failure

@@ -14,17 +14,17 @@ class TestTask2 < Test::Unit::TestCase
     # assert_equal("[\"Armando\", \"S\"] wins since S>P", rps_game_winner([ [ "Armando", "s" ], [ "Dave", "p" ] ]))
     # assert_equal("[\"Armando\", \"P\"] wins since P>R", rps_game_winner([ [ "Armando", "P" ], [ "Dave", "R" ] ]))
     # assert_equal("[\"Armando\", \"P\"] wins since P>R", rps_game_winner([ [ "Armando", "p" ], [ "Dave", "r" ] ]))
-#     
+    #     
     assert_equal(["Dave", "S"], rps_game_winner([ [ "Armando", "P" ], [ "Dave", "S" ] ]))
-    assert_equal(["Dave", "S"], rps_game_winner([ [ "Armando", "p" ], [ "Dave", "s" ] ]))
+    assert_equal(["Dave", "s"], rps_game_winner([ [ "Armando", "p" ], [ "Dave", "s" ] ]))
     assert_equal(["Armando", "P"], rps_game_winner([ [ "Armando", "P" ], [ "Dave", "P" ] ]))
-    assert_equal(["Armando", "P"], rps_game_winner([ [ "Armando", "p" ], [ "Dave", "p" ] ]))
+    assert_equal(["Armando", "p"], rps_game_winner([ [ "Armando", "p" ], [ "Dave", "p" ] ]))
     assert_equal(["Armando", "R"], rps_game_winner([ [ "Armando", "R" ], [ "Dave", "S" ] ]))
-    assert_equal(["Armando", "R"], rps_game_winner([ [ "Armando", "r" ], [ "Dave", "s" ] ]))
+    assert_equal(["Armando", "r"], rps_game_winner([ [ "Armando", "r" ], [ "Dave", "s" ] ]))
     assert_equal(["Armando", "S"], rps_game_winner([ [ "Armando", "S" ], [ "Dave", "P" ] ]))
-    assert_equal(["Armando", "S"], rps_game_winner([ [ "Armando", "s" ], [ "Dave", "p" ] ]))
+    assert_equal(["Armando", "s"], rps_game_winner([ [ "Armando", "s" ], [ "Dave", "p" ] ]))
     assert_equal(["Armando", "P"], rps_game_winner([ [ "Armando", "P" ], [ "Dave", "R" ] ]))
-    assert_equal(["Armando", "P"], rps_game_winner([ [ "Armando", "p" ], [ "Dave", "r" ] ]))
+    assert_equal(["Armando", "p"], rps_game_winner([ [ "Armando", "p" ], [ "Dave", "r" ] ]))
     assert_equal(["Richard", "R"], rps_tournament_winner(
     [
       [
