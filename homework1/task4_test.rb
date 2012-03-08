@@ -1,7 +1,7 @@
 require "./task4"
 require "test/unit"
 
-class TestTask4a < Test::Unit::TestCase
+class TestTask4 < Test::Unit::TestCase
   def test_simple
     assert_equal(true, Dessert.new('Dessert1', 100).healthy?)
     assert_equal(false, Dessert.new('Dessert2', 200).healthy?)

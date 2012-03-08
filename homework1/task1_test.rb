@@ -1,7 +1,7 @@
 require "./task1"
 require "test/unit"
 
-class TestTask1a < Test::Unit::TestCase
+class TestTask1 < Test::Unit::TestCase
   def test_simple
     assert_equal(true, palindrome?("A man, a plan, a canal -- Panama"))
     assert_equal(true, palindrome?("Madam, I'm Adam!"))
