@@ -16,6 +16,8 @@ class TestTask1 < Test::Unit::TestCase
     assert_equal(true, "abba".palindrome?)
     assert_equal(true, [1,2,3,2,1].palindrome?)
     assert_equal(false, [1 => 1, 2 => 1, 3 => 1, 2 => 1, 1 => 1].palindrome?)
+    assert_equal(false, {"hello"=>"world"}.palindrome?)
+    assert_equal(false, (1..2).palindrome?)
   end
 end
 

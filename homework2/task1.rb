@@ -30,3 +30,15 @@ class Array
     self.to_s.palindrome?
   end
 end
+
+class Hash
+  def palindrome?()
+    self.to_s.palindrome?
+  end
+end
+
+class Range
+  def palindrome?()
+    self.to_s.palindrome?
+  end
+end
