@@ -25,6 +25,12 @@ class String
   end
 end
 
+module Enumerable
+  def palindrome?
+    self.to_a == self.to_a.reverse
+  end
+end
+
 class Array
   def palindrome?()
     self.to_s.palindrome?
@@ -33,7 +39,7 @@ end
 
 class Hash
   def palindrome?()
-    self.to_s.palindrome?
+    false
   end
 end
 
