@@ -1,47 +1,30 @@
 class MoviesController < ApplicationController
-  
-  before_filter :set_movie_params, :only => [:index]
+  require 'logger'
+
+  $LOG = Logger.new('hw2.log', 5, 'daily')
 
   def show
     id = params[:id] # retrieve movie ID from URI route
     @movie = Movie.find(id) # look up movie by unique ID
-    # will render app/views/movies/show.<extension> by default
+  # will render app/views/movies/show.<extension> by default
   end
 
   def index
-    
-    # clear session data
-    if params[:clear]
-      session.clear
-      return redirect_to movies_path
+    if (params[:sort] || params[:refresh])
+      session[:sort] = params[:sort]
     end
-    
-    @movies = Movie.all
-    @all_ratings = @movies.collect{|m| m.rating}.uniq
-    
-    ratings = @movies_params[:ratings].keys
-    sort = @movies_params[:sort].keys
-    ratings.delete("all")
-    sort.delete("all")
-    
-  
-    unless ratings.empty?
-      @movies = Movie.find_all_by_rating(ratings)
+    if (params[:ratings] || params[:refresh])
+      session[:ratings] = params[:ratings]
     end
-    unless sort.empty?
-      @movies = @movies.sort{|a,b| a.send(sort.first) <=> b.send(sort.first)}
-    end
-  
-    if !params[:sort] and !session[:sort] and !params[:ratings] and !session[:ratings]
-      return
-    else
-      if params[:sort] and params[:ratings]
-        return
-      else
-        redirect_to movies_path(@movies_params)
-      end
-    end
-  
+    @all_ratings = Movie.ratings
+    @sort_column = session[:sort]
+    @selected_ratings = session[:ratings] == nil ? nil : session[:ratings].keys
+    @title_style = @sort_column == 'title' ? 'hilite' : ''
+    @release_date_style = @sort_column == 'release_date' ? 'hilite' : ''
+    
+    # $LOG.debug("@sort_column = #{@sort_column}, @selected_ratings = #{@selected_ratings}");
+       
+    @movies = Movie.find(:all, {:conditions => @selected_ratings == nil ? nil : ["rating in (?)", @selected_ratings], :order => params[:sort]})
   end
 
   def new
@@ -70,28 +53,6 @@ class MoviesController < ApplicationController
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
-  end
-  
-  private
-  
-  def set_movie_params
-    # session[:sort] = params[:sort] ? params[:sort] : session[:sort]
-    # session[:ratings] = params[:ratings] ? params[:ratings] : session[:ratings]
-    
-    movies_params = {}
-    movies_params[:sort] = {'all' => 1}
-    movies_params[:ratings] = {'all' => 1}
-    if params[:sort]
-      movies_params[:sort] = params[:sort]
-    # elsif session[:sort]
-      # movies_params[:sort] = session[:sort]
-    end
-    if params[:ratings]
-      movies_params[:ratings] = params[:ratings]
-    # elsif session[:ratings]
-      # movies_params[:ratings] = session[:ratings]
-    end
-    @movies_params = movies_params
   end
 
 end
